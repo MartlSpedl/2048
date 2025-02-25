@@ -15,6 +15,9 @@ window.onload = function() {
     // Touch für Mobilgeräte
     document.addEventListener("touchstart", startTouch);
     document.addEventListener("touchend", endTouch);
+
+    // Add event listener for the Replay button
+    document.getElementById("replayButton").addEventListener("click", resetGame);
 }
 
 function setGame() {
@@ -267,4 +270,31 @@ function noMovesLeft() {
 function showGameOver() {
     document.getElementById("finalScore").innerText = score;
     document.getElementById("gameOver").style.display = "block";
+}
+
+function resetGame() {
+    // Reset score
+    score = 0;
+    document.getElementById("score").innerText = score;
+
+    // Reset board
+    board = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ];
+
+    // Clear all tiles
+    const tiles = document.getElementsByClassName("tile");
+    for (let tile of tiles) {
+        tile.innerText = "";
+        tile.classList.value = "tile"; // Reset to default tile class
+    }
+
+    // Hide game over screen
+    document.getElementById("gameOver").style.display = "none";
+
+    // Start a new game
+    setTwo();
 }
