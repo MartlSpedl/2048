@@ -24,27 +24,24 @@ hr {
     width: 400px;
     height: 400px;
     background-color: rgba(205, 193, 181, 0.8); /* Leicht transparente Kacheln */
-    border: 8px solid #bbada0; /* Thicker, cleaner border for the frame */
+    border: 5px solid #bbada0;
     display: flex;
     flex-wrap: wrap;
-    margin: 0 auto; /* Centers the board horizontally */
+    margin: 0;
     padding: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow for depth */
 }
 
 .tile {
-    width: 96px; /* Adjusted to account for internal spacing or border removal */
-    height: 96px; /* Adjusted to account for internal spacing or border removal */
+     width: 90.4px; /* Größe der Kacheln minus Rand */
+    height: 90.4px; /* Größe der Kacheln minus Rand */
+    border: 5px solid #bbada0;
     font-size: 40px;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0; /* Remove margin to prevent gaps */
+    margin: 0;
     padding: 0;
-    background-color: rgba(238, 228, 218, 0.6); /* Default background for empty tiles */
-    color: white;
-    box-sizing: border-box; /* Ensures borders and padding are included in width/height */
 }
 
 /* centered text for title and score */
