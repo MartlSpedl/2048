@@ -2,10 +2,17 @@ var board;
 var score = 0;
 var rows = 4;
 var columns = 4;
+var playerName = "Player"; // Default player name; this could be set via input or prompt
 
 var startX, startY, endX, endY; // Koordinaten für Touch und Maus
 
-window.onload = function() {
+window.onload = function () {
+    // Prompt for player name when the game starts (optional, for simplicity)
+    playerName = prompt("Bitte gib deinen Namen ein:");
+    document.getElementById("playerName").innerText = playerName;
+    document.getElementById("playerNameend").innerText = playerName;
+
+
     setGame();
 
     // Mausbewegung erkennen
@@ -65,7 +72,10 @@ document.addEventListener('keyup', (e) => {
     } else if (e.code == "ArrowDown") {
         moved = slideDown();
     }
-    
+    if (noMovesLeft()) {
+        showGameOver();
+    }
+
     if (moved) {  // Nur eine Kachel hinzufügen, wenn sich das Board bewegt hat
         document.getElementById("score").innerText = score;
         if (noMovesLeft()) {
@@ -96,7 +106,9 @@ function handleSwipe() {
             moved = slideUp();
         }
     }
-
+    if (noMovesLeft()) {
+        showGameOver();
+    }
     if (moved) {  // Nur eine Kachel hinzufügen, wenn sich das Board bewegt hat
         document.getElementById("score").innerText = score;
         if (noMovesLeft()) {
@@ -247,29 +259,43 @@ function hasEmptyTile() {
 }
 
 function noMovesLeft() {
+    var cantMove = true;
     if (hasEmptyTile()) {
-        return false; // Wenn es noch leere Felder gibt, sind Züge möglich
+        cantMove = false; // Wenn es noch leere Felder gibt, sind Züge möglich
     }
-
-    // Überprüfe, ob angrenzende Kacheln kombiniert werden können
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < columns; c++) {
-            let current = board[r][c];
-            if (r < rows - 1 && current == board[r + 1][c]) {
-                return false; // Überprüfe Kachel darunter
-            }
-            if (c < columns - 1 && current == board[r][c + 1]) {
-                return false; // Überprüfe Kachel rechts
+    if (cantMove) {
+        // Überprüfe, ob angrenzende Kacheln kombiniert werden können
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < columns; c++) {
+                let current = board[r][c];
+                if (r < rows - 1 && current == board[r + 1][c]) {
+                    cantMove = false; // Überprüfe Kachel darunter
+                }
+                if (c < columns - 1 && current == board[r][c + 1]) {
+                    cantMove = false; // Überprüfe Kachel rechts
+                }
             }
         }
     }
 
-    return true; // Keine Bewegungen mehr möglich
+    return cantMove; // Keine Bewegungen mehr möglich
 }
 
 function showGameOver() {
+    // Update the final score in the game over screen
     document.getElementById("finalScore").innerText = score;
     document.getElementById("gameOver").style.display = "block";
+    /*
+    // Add player name to the game over screen
+    let gameOverMessage = document.getElementById("gameOver");
+    gameOverMessage.innerHTML = `
+        <h1>Game Over</h1>
+        <h2>${playerName}, dein Endergebnis: <span id="finalScore">${score}</span></h2>
+        <button id="replayButton">Erneut spielen</button>
+    `;
+    gameOverMessage.style.display = "block";
+
+*/
 }
 
 function resetGame() {
