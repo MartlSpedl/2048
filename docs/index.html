@@ -9,15 +9,17 @@
         <script src="2048.js" defer></script> <!-- Added 'defer' to ensure JS loads after HTML -->
     </head>
     <body>
-        <h1>2048</h1>
-        <hr>
-        <h2>Score: <span id="score">0</span></h2>
-        <div id="board">
-            <div id="gameOver" style="display:none;">
-                <h1>Game Over</h1>
-                <h2>Final Score: <span id="finalScore">0</span></h2>
-                <button id="replayButton">Erneut spielen</button>
-            </div>
+    <h1>2048</h1>
+    <hr>
+    <h2>Spieler: <span id="playerName"> </span></h2>
+    <h2>Score: <span id="score">0</span></h2>
+    <div id="board">
+        <div id="gameOver" style="display:none;">
+            <h1>Game Over</h1>
+            <h2>Final Score: <span id="finalScore">0</span></h2>
+            <h2 id="playerNameend"></h2>
+            <button id="replayButton" onclick="resetGame()">Erneut spielen</button>
         </div>
+    </div>
     </body>
 </html>
