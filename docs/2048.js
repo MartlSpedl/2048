@@ -15,10 +15,10 @@ function getCleanToken(storedToken) {
   return storedToken.slice(0, -1); // Entfernt das letzte Zeichen
 }
 
-const GITHUB_TOKEN = getCleanToken(STORED_GITHUB_TOKEN); // Bereinigter Token
+const GITHUB_TOKEN = getCleanToken(STORED_GITHUB_TOKEN);  // Dein Token
 const REPO_OWNER = "MartlSpedl";
 const REPO_NAME = "2048-itp";
-const BRANCH = "main";
+const BRANCH = "main"; // Branch-Name
 const FILE_PATH = "docs/highscores.csv";
 
 window.onload = async function () {
@@ -346,7 +346,6 @@ async function loadHighscoresFromGitHub() {
         Authorization: `token ${GITHUB_TOKEN}`,
         Accept: "application/vnd.github.v3+json"
       }
-      console.log
     });
 
     if (!response.ok) {
