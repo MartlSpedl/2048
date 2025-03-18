@@ -1,25 +1,34 @@
 <!-- Rogl, Sperl, Wastlbauer, Schinagl - 2048 ITP -->
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>2048</title>
-        <link rel="stylesheet" href="2048.css">
-        <script src="2048.js" defer></script> <!-- Added 'defer' to ensure JS loads after HTML -->
-    </head>
-    <body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2048</title>
+  <link rel="stylesheet" href="2048.css">
+  <script src="2048.js" defer></script> <!-- Added 'defer' to ensure JS loads after HTML -->
+</head>
+<body>
+<div class="container">
+  <div class="game-section">
     <h1>2048</h1>
     <hr>
-    <h2>Spieler: <span id="playerName"> </span></h2>
+    <h2>Spieler: <span id="playerName"></span></h2>
     <h2>Score: <span id="score">0</span></h2>
     <div id="board">
-        <div id="gameOver" style="display:none;">
-            <h1>Game Over</h1>
-            <h2>Final Score: <span id="finalScore">0</span></h2>
-            <h2 id="playerNameend"></h2>
-            <button id="replayButton" onclick="resetGame()">Erneut spielen</button>
-        </div>
+      <div id="gameOver" style="display:none;">
+        <h1>Game Over</h1>
+        <h2>Final Score: <span id="finalScore">0</span></h2>
+        <h2 id="playerNameend"></h2>
+        <button id="replayButton" onclick="resetGame()">Erneut spielen</button>
+      </div>
     </div>
-    </body>
+  </div>
+  <div class="leaderboard">
+    <h2>Top 10 Highscores</h2>
+    <ul id="highscoreList"></ul>
+  </div>
+</div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91eb35ad2b51adc5',t:'MTc0MTY5Nzc2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
 </html>
