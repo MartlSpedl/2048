@@ -9,7 +9,7 @@ var highscores = []; // Store highscores in memory
 var startX, startY, endX, endY; // Koordinaten für Touch und Maus
 
 // GitHub API configuration
-const GITHUB_TOKEN = "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"; // Dein Token
+const GITHUB_TOKEN = "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"; // Dein Token
 const REPO_OWNER = "MartlSpedl";
 const REPO_NAME = "2048-itp";
 const BRANCH = "main"; // Branch-Name
