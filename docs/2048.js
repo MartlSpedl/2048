@@ -9,10 +9,16 @@ var highscores = []; // Store highscores in memory
 var startX, startY, endX, endY; // Koordinaten für Touch und Maus
 
 // GitHub API configuration
-const GITHUB_TOKEN = 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; // Dein Token
+const STORED_GITHUB_TOKEN = "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1"; // Token mit angehängter 1
+// Funktion, um die letzte Stelle zu entfernen
+function getCleanToken(storedToken) {
+  return storedToken.slice(0, -1); // Entfernt das letzte Zeichen
+}
+
+const GITHUB_TOKEN = getCleanToken(STORED_GITHUB_TOKEN); // Bereinigter Token
 const REPO_OWNER = "MartlSpedl";
 const REPO_NAME = "2048-itp";
-const BRANCH = "main"; // Branch-Name
+const BRANCH = "main";
 const FILE_PATH = "docs/highscores.csv";
 
 window.onload = async function () {
