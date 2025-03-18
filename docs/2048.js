@@ -17,7 +17,7 @@ function getCleanToken(storedToken) {
 
 const GITHUB_TOKEN = getCleanToken(STORED_GITHUB_TOKEN);  // Dein Token
 const REPO_OWNER = "MartlSpedl";
-const REPO_NAME = "2048-itp";
+const REPO_NAME = "2048";
 const BRANCH = "main"; // Branch-Name
 const FILE_PATH = "docs/highscores.csv";
 
