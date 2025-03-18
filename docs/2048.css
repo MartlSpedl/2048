@@ -3,25 +3,34 @@ body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  height: 100vh;
-  overflow: hidden;
+  height: 100vh; /* Ensure body takes full viewport height */
+  overflow: hidden; /* Disable scrolling entirely */
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   display: flex;
   justify-content: center;
   align-items: center;
+  touch-action: none; /* Prevent touch scrolling on mobile */
 }
 
 /* Container */
 .container {
   display: flex;
-  flex-direction: row; /* Horizontales Layout */
-  align-items: flex-start; /* Ausrichtung an der Oberkante */
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  height: 100vh;
-  position: relative;
+  height: 100vh; /* Match viewport height */
   width: 100%;
-  max-width: 1200px; /* Erhöhte Breite, um Platz für Leaderboard zu schaffen */
+  max-width: 1200px;
   padding: 20px;
+  position: relative;
+  overflow: hidden; /* Ensure no overflow within container */
+}
+
+@media (min-width: 601px) {
+  .container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
 }
 
 /* Spielebereich */
@@ -33,8 +42,16 @@ body {
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  margin-right: 20px; /* Abstand zum Leaderboard */
-  margin-top: 45px; /* Abstand zum Leaderboard */
+  margin-bottom: 20px;
+  overflow: hidden; /* Prevent internal scrolling */
+  max-height: 90vh; /* Limit height to fit within viewport */
+}
+
+@media (min-width: 601px) {
+  .game-section {
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
 }
 
 /* Überschriften */
@@ -68,8 +85,16 @@ hr {
   display: flex;
   flex-wrap: wrap;
   padding: 5px;
-  margin: 0 auto; /* Zentriert das Board im game-section */
-  margin-top: 20px; /* Zentriert das Board im game-section */
+  margin: 0 auto;
+  margin-top: 20px;
+  overflow: hidden; /* Prevent internal scrolling */
+}
+
+@media (max-width: 600px) {
+  #board {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 /* Kacheln */
@@ -85,6 +110,16 @@ hr {
   align-items: center;
   transition: all 0.2s ease-in-out;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  touch-action: manipulation; /* Improve touch responsiveness */
+}
+
+@media (max-width: 600px) {
+  .tile {
+    width: 65px;
+    height: 65px;
+    font-size: 28px;
+    margin: 4px;
+  }
 }
 
 /* Kachel-Farben mit leichtem Glanz */
@@ -118,14 +153,14 @@ hr {
 
 /* Leaderboard */
 .leaderboard {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   background: rgba(255, 255, 255, 0.95);
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   min-width: 200px;
+  max-width: 300px;
+  max-height: 70vh; /* Limit height to avoid overflow */
+  overflow-y: auto; /* Allow internal scrolling if content overflows */
 }
 
 .leaderboard h2 {
@@ -146,6 +181,36 @@ hr {
   color: #666;
 }
 
+/* Desktop: Always show leaderboard */
+@media (min-width: 601px) {
+  .leaderboard {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: block;
+  }
+}
+
+/* Mobile: Show leaderboard only when game over */
+@media (max-width: 600px) {
+  .leaderboard {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  #gameOver:not([style*="display: none"]) ~ .leaderboard {
+    display: block;
+  }
+
+  #gameOver {
+    z-index: 20;
+  }
+}
+
 /* Game Over Overlay */
 #gameOver {
   position: absolute;
@@ -159,6 +224,9 @@ hr {
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease;
+  z-index: 20;
+  max-height: 80vh; /* Limit height to fit within viewport */
+  overflow-y: auto; /* Allow internal scrolling if content overflows */
 }
 
 #gameOver h1 {
@@ -180,6 +248,7 @@ hr {
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
+  touch-action: manipulation;
 }
 
 #replayButton:hover {
@@ -200,20 +269,8 @@ hr {
   -ms-user-select: none;
 }
 
-/* Responsive Design */
+/* Additional Mobile Adjustments */
 @media (max-width: 600px) {
-  #board {
-    width: 300px;
-    height: 300px;
-  }
-
-  .tile {
-    width: 65px;
-    height: 65px;
-    font-size: 28px;
-    margin: 4px;
-  }
-
   h1 {
     font-size: 2em;
   }
@@ -222,17 +279,16 @@ hr {
     font-size: 1.2em;
   }
 
-  /* Leaderboard */
-  .leaderboard {
-    position: relative; /* Relativ zur Flex-Box */
-    top: 0; /* Keine Überlappung nach oben */
-    right: 0; /* An den rechten Rand des Containers */
-    background: rgba(255, 255, 255, 0.95);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    min-width: 200px;
-    max-width: 300px;
-    margin-top: 0; /* Entferne margin-top für bessere Kontrolle */
+  #replayButton {
+    font-size: 1em;
+    padding: 8px 16px;
+  }
+
+  .game-section {
+    max-height: 85vh; /* Adjust for mobile viewport */
+  }
+
+  #board {
+    margin-top: 10px; /* Reduce margin for tighter layout */
   }
 }
