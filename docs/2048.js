@@ -9,7 +9,7 @@ var highscores = []; // Store highscores in memory
 var startX, startY, endX, endY; // Koordinaten für Touch und Maus
 
 // GitHub API configuration
-const STORED_GITHUB_TOKEN = "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2"; // Token mit angehängter 1
+const STORED_GITHUB_TOKEN = "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1"; // Token mit angehängter 1
 // Funktion, um die letzte Stelle zu entfernen
 function getCleanToken(storedToken) {
   return storedToken.slice(0, -1); // Entfernt das letzte Zeichen
