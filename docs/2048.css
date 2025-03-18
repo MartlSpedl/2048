@@ -1,137 +1,238 @@
+/* Grundlegende Styles */
 body {
-    font-family: Arial;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    overflow: hidden; /* Verhindert Scrollen */
-    background-image: url("htl_logo.png"); /* Verwende den Pfad zu deinem Logo */
-    background-size: 20%; /* Bild an Bildschirmgröße anpassen */
-    background-position: center; /* Bild in der Mitte zentrieren */
-    background-repeat: no-repeat; 
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container */
+.container {
+  display: flex;
+  flex-direction: row; /* Horizontales Layout */
+  align-items: flex-start; /* Ausrichtung an der Oberkante */
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+  width: 100%;
+  max-width: 1200px; /* Erhöhte Breite, um Platz für Leaderboard zu schaffen */
+  padding: 20px;
+}
+
+/* Spielebereich */
+.game-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-right: 20px; /* Abstand zum Leaderboard */
+  margin-top: 45px; /* Abstand zum Leaderboard */
+}
+
+/* Überschriften */
+h1 {
+  font-size: 3em;
+  color: #776e65;
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: #776e65;
+  margin: 5px 0;
 }
 
 hr {
-    width: 200px;
-    margin: 10px auto; /* Centers the line */
+  width: 200px;
+  border: none;
+  height: 2px;
+  background: #bbada0;
+  margin: 15px auto;
 }
 
+/* Spielbrett */
 #board {
-    width: 400px;
-    height: 400px;
-    background-color: rgba(205, 193, 181, 0.8); /* Leicht transparente Kacheln */
-    border: 5px solid #bbada0;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    padding: 0;
+  width: 400px;
+  height: 400px;
+  background: #bbada0;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  margin: 0 auto; /* Zentriert das Board im game-section */
+  margin-top: 20px; /* Zentriert das Board im game-section */
 }
 
+/* Kacheln */
 .tile {
-     width: 90.4px; /* Größe der Kacheln minus Rand */
-    height: 90.4px; /* Größe der Kacheln minus Rand */
-    border: 5px solid #bbada0;
-    font-size: 40px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+  width: 90px;
+  height: 90px;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 36px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* centered text for title and score */
-h1, h2 {
-    margin: 0;
-    padding: 0;
+/* Kachel-Farben mit leichtem Glanz */
+.x2 { background: #eee4da; color: #776e65; }
+.x4 { background: #ede0c8; color: #776e65; }
+.x8 { background: #f2b179; color: white; }
+.x16 { background: #f59563; color: white; }
+.x32 { background: #f67c5f; color: white; }
+.x64 { background: #f65e3b; color: white; }
+.x128 { background: #edcf72; color: white; }
+.x256 { background: #edcc61; color: white; }
+.x512 { background: #edc850; color: white; }
+.x1024 { background: #edc53f; color: white; }
+.x2048 { background: #edc22e; color: white; }
+.x4096 { background: #ff3c3c; color: white; }
+.x8192 { background: #ff2020; color: white; }
+
+/* Animation beim Erscheinen neuer Kacheln */
+.tile:empty {
+  background: rgba(238, 228, 218, 0.35);
 }
 
-/* colored tiles */
-.x2 {
-    background-color: rgba(238, 228, 218, 0.6);
-    color: white;
+.tile:not(:empty) {
+  animation: appear 0.2s ease;
 }
 
-.x4 {
-    background-color: rgba(236, 224, 202, 0.6);
-    color: white;
+@keyframes appear {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
 }
 
-.x8 {
-    background-color: rgba(244, 177, 122, 0.6);
-    color: white;
+/* Leaderboard */
+.leaderboard {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
 }
 
-.x16 {
-    background-color: rgba(245, 149, 117, 0.6);
-    color: white;
+.leaderboard h2 {
+  font-size: 1.3em;
+  color: #776e65;
+  margin: 0 0 10px;
 }
 
-.x32 {
-    background-color: rgba(245, 124, 95, 0.6);
-    color: white;
+#highscoreList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.x64 {
-    background-color: rgba(246, 93, 59, 0.6);
-    color: white;
+#highscoreList li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  color: #666;
 }
 
-.x128 {
-    background-color: rgba(237, 206, 113, 0.6);
-    color: white;
-}
-
-.x256 {
-    background-color: rgba(237, 204, 99, 0.6);
-    color: white;
-}
-
-.x512 {
-    background-color: rgba(237, 198, 81, 0.6);
-    color: white;
-}
-
-.x1024 {
-    background-color: rgba(238, 199, 68, 0.6);
-    color: white;
-}
-
-.x2048 {
-    background-color: rgba(236, 194, 48, 0.6);
-    color: white;
-}
-
-.x4096 {
-    background-color: rgba(254, 61, 61, 0.6);
-    color: white;
-}
-
-.x8192 {
-    background-color: rgba(255, 32, 32, 0.6);
-    color: white;
-}
-
-/* disable text selection */
-* {
-    user-select: none; /* Deaktiviert Textauswahl für alle Elemente */
-    -webkit-user-select: none; /* Für WebKit-basierte Browser wie Chrome, Safari */
-    -moz-user-select: none; /* Für Mozilla-basierte Browser wie Firefox */
-    -ms-user-select: none; /* Für ältere Internet Explorer Versionen */
-}
-
+/* Game Over Overlay */
 #gameOver {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+#gameOver h1 {
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+#gameOver h2 {
+  color: #ddd;
+}
+
+#replayButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background: #8f7a66;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#replayButton:hover {
+  background: #9f8b77;
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Textauswahl deaktivieren */
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  #board {
+    width: 300px;
+    height: 300px;
+  }
+
+  .tile {
+    width: 65px;
+    height: 65px;
+    font-size: 28px;
+    margin: 4px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  /* Leaderboard */
+  .leaderboard {
+    position: relative; /* Relativ zur Flex-Box */
+    top: 0; /* Keine Überlappung nach oben */
+    right: 0; /* An den rechten Rand des Containers */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px;
     border-radius: 10px;
-    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    max-width: 300px;
+    margin-top: 0; /* Entferne margin-top für bessere Kontrolle */
+  }
 }
