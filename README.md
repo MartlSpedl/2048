@@ -62,7 +62,7 @@ Ideen, Fehler oder Verbesserungen? Contributions sind willkommen!
 ## 🌟 Danke
 
 Viel Spaß beim Spielen und Danke, dass du mein Projekt ausprobierst! Feedback? Schreib mir gerne auf GitHub.  
-*Entwickelt von Team SWSR*
+*Entwickelt von Team*
 [S](https://github.com/MartlSpedl)
 [W](https://github.com/Wastlbauer)
 [S](https://github.com/lorenzschinagl)
