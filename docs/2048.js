@@ -340,6 +340,7 @@ async function loadHighscoresFromGitHub() {
         Authorization: `token ${GITHUB_TOKEN}`,
         Accept: "application/vnd.github.v3+json"
       }
+      console.log
     });
 
     if (!response.ok) {
